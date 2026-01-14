@@ -13,15 +13,56 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(char *str, int c)
 {
 	while (*str)
 	{
 		if (*str == (char)c)
-			return ((char *)str);
+			return (str);
 		str++;
 	}
 	if (c == '\0')
-		return ((char *)str);
+		return (str);
 	return (NULL);
+}
+
+char	*ft_strjoin(char *stash, char *buffer)
+{
+	int i;
+	int j;
+	char *res;
+
+	i = 0;
+	j = 0;
+	if (stash != NULL)
+	{
+		while (stash[i])
+			i++;
+	}
+	while (buffer[j])
+		j++;
+	res = malloc(i+j+1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	if (stash != NULL)
+	{
+	while (stash[i])
+		{
+			res[j] = stash[i];
+			i++;
+			j++;
+		}
+	}
+	i = 0;
+	while (buffer[i])
+	{
+		res[j] = buffer[i];
+		i++;
+		j++;
+	}
+	res[j] = '\0';
+	free(stash);
+	return (res);
 }
