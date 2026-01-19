@@ -26,6 +26,33 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
+
+// strjoin
+static void write_res(char *stash, char *buffer, char *res)
+{	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	if (stash != NULL)
+	{
+		while (stash[i])
+			{
+				res[j] = stash[i];
+				i++;
+				j++;
+			}
+	}
+	i = 0;
+	while (buffer[i])
+	{
+		res[j] = buffer[i];
+		i++;
+		j++;
+	}
+	res[j] = '\0';
+}
+
 char	*ft_strjoin(char *stash, char *buffer)
 {
 	int i;
@@ -44,25 +71,7 @@ char	*ft_strjoin(char *stash, char *buffer)
 	res = malloc(i+j+1);
 	if (!res)
 		return (NULL);
-	i = 0;
-	j = 0;
-	if (stash != NULL)
-	{
-	while (stash[i])
-		{
-			res[j] = stash[i];
-			i++;
-			j++;
-		}
-	}
-	i = 0;
-	while (buffer[i])
-	{
-		res[j] = buffer[i];
-		i++;
-		j++;
-	}
-	res[j] = '\0';
+	write_res(stash, buffer, res);
 	free(stash);
 	return (res);
 }
