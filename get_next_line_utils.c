@@ -75,3 +75,13 @@ char	*ft_strjoin(char *stash, char *buffer)
 	free(stash);
 	return (res);
 }
+
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
