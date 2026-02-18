@@ -15,15 +15,36 @@
 
 char *get_next_line(int fd)
 {
-    static char stash;
-    char buffer[BUFFER_SIZE + 1];
-    char *newline;
-    int bytes;
+	static char *stash;
+	char buffer[BUFFER_SIZE + 1];
+	char *newline;
+	int bytes;
+	int i;
+	char *res;
+	int j;
 
-    while (newline == NULL)
-    {
-        bytes = read(fd, buffer, BUFFER_SIZE);
-        if (bytes <= 0)
-            break;
-    }
+	newline == NULL;
+
+	while (newline == NULL)
+	{
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes <= 0)
+			break;
+		buffer[bytes] = '\0';
+		stash = strjoin(stash, buffer);
+		newline = strchr(stash, '\n');
+	}
+	i = 0;
+	if (bytes >= 0)
+	{
+		j = ft_strlen(res);
+	    while (stash[i] != '\n' && stash[i] != '\0')
+		{
+			res[j] = stash[i];
+			i++;
+			j++;
+		}
+		if (stash[i] == '\n')
+			write(1, "\n", 1);
+	}
 }
