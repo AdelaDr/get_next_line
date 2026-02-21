@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "get_next_line.h"
 
 char	*ft_strchr(char *str, int c)
@@ -27,7 +28,7 @@ char	*ft_strchr(char *str, int c)
 }
 
 
-// strjoin
+// strjoin //
 static void write_res(char *stash, char *buffer, char *res)
 {	int i;
 	int j;
@@ -81,7 +82,63 @@ int	ft_strlen(char *str)
 	int	len;
 
 	len = 0;
-	while (str[len])
+	while (str[len] && str[len] != '\n')
 		len++;
 	return (len);
+}
+
+// remove line //
+static int	find_newline(char *stash)
+{
+	int	i;
+
+	if (!stash)
+		return (-1);
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		return (i);
+	return (-1);
+}
+
+static char	*create_newstash(char *stash, int start)
+{
+	char	*newstash;
+	int		len;
+	int		j;
+
+	len = 0;
+	while (stash[start + len])
+		len++;
+	newstash = malloc(len + 1);
+	if (!newstash)
+		return (NULL);
+	j = 0;
+	while (j < len)
+	{
+		newstash[j] = stash[start + j];
+		j++;
+	}
+	newstash[j] = '\0';
+	return (newstash);
+}
+
+char	*ft_remove_line(char *stash)
+{
+	char	*newstash;
+	int		i;
+
+	if (!stash)
+		return (NULL);
+	i = find_newline(stash);
+	if (i == -1)
+	{
+		free(stash);
+		return (NULL);
+	}
+	i++;
+	newstash = create_newstash(stash, i);
+	free(stash);
+	return (newstash);
 }
