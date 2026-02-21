@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "get_next_line.h"
 
 char *get_next_line(int fd)
@@ -23,7 +24,7 @@ char *get_next_line(int fd)
 	char *res;
 	int j;
 
-	newline == NULL;
+	newline = NULL;
 
 	while (newline == NULL)
 	{
@@ -31,20 +32,28 @@ char *get_next_line(int fd)
 		if (bytes <= 0)
 			break;
 		buffer[bytes] = '\0';
-		stash = strjoin(stash, buffer);
-		newline = strchr(stash, '\n');
+		stash = ft_strjoin(stash, buffer);
+		newline = ft_strchr(stash, '\n');
 	}
 	i = 0;
 	if (bytes >= 0)
 	{
-		j = ft_strlen(res);
+		j = ft_strlen(stash);
+		res = malloc(j + 2);
 	    while (stash[i] != '\n' && stash[i] != '\0')
 		{
-			res[j] = stash[i];
+			res[i] = stash[i];
 			i++;
-			j++;
 		}
-		if (stash[i] == '\n')
-			write(1, "\n", 1);
+		if(stash[i] == '\n')
+		{
+			res[i] = '\n';
+			i++;
+		}
+		res[i] = '\0';
+		stash = ft_remove_line(stash);
+		return (res);
 	}
 }
+
+
