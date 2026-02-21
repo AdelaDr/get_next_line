@@ -25,5 +25,6 @@ char *get_next_line(int fd);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char *stash, char *buffer);
 int	ft_strlen(char *str);
+char *ft_remove_line(char *stash);
 
 #endif
