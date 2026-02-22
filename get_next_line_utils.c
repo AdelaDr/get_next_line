@@ -79,16 +79,6 @@ char	*ft_strjoin(char *stash, char *buffer)
 	return (res);
 }
 
-int	ft_strlen(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (str[len] && str[len] != '\n')
-		len++;
-	return (len);
-}
-
 // remove line //
 static int	find_newline(char *stash)
 {
