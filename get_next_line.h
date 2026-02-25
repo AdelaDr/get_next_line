@@ -13,17 +13,18 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-char *get_next_line(int fd);
-char	*ft_strchr(const char *str, int c);
+char	*get_next_line(int fd);
+char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *stash, char *buffer);
-char *ft_remove_line(char *stash);
+int		find_newline(char *stash);
+char	*create_newstash(char *stash, int start);
 
 #endif
