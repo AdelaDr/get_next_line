@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "get_next_line.h"
 
 char	*ft_strchr(char *str, int c)
 {
 	if (!str)
-    return (NULL);
+		return (NULL);
 	while (*str)
 	{
 		if (*str == (char)c)
@@ -29,22 +29,22 @@ char	*ft_strchr(char *str, int c)
 	return (NULL);
 }
 
-
 // strjoin //
-static void write_res(char *stash, char *buffer, char *res)
-{	int i;
-	int j;
-	
+static void	write_res(char *stash, char *buffer, char *res)
+{
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	if (stash != NULL)
 	{
 		while (stash[i])
-			{
-				res[j] = stash[i];
-				i++;
-				j++;
-			}
+		{
+			res[j] = stash[i];
+			i++;
+			j++;
+		}
 	}
 	i = 0;
 	while (buffer[i])
@@ -58,9 +58,9 @@ static void write_res(char *stash, char *buffer, char *res)
 
 char	*ft_strjoin(char *stash, char *buffer)
 {
-	int i;
-	int j;
-	char *res;
+	int		i;
+	int		j;
+	char	*res;
 
 	i = 0;
 	j = 0;
@@ -71,7 +71,7 @@ char	*ft_strjoin(char *stash, char *buffer)
 	}
 	while (buffer[j])
 		j++;
-	res = malloc(i+j+1);
+	res = malloc(i + j + 1);
 	if (!res)
 		return (NULL);
 	write_res(stash, buffer, res);
@@ -79,8 +79,7 @@ char	*ft_strjoin(char *stash, char *buffer)
 	return (res);
 }
 
-// remove line //
-static int	find_newline(char *stash)
+int	find_newline(char *stash)
 {
 	int	i;
 
@@ -94,7 +93,7 @@ static int	find_newline(char *stash)
 	return (-1);
 }
 
-static char	*create_newstash(char *stash, int start)
+char	*create_newstash(char *stash, int start)
 {
 	char	*newstash;
 	int		len;
@@ -113,24 +112,5 @@ static char	*create_newstash(char *stash, int start)
 		j++;
 	}
 	newstash[j] = '\0';
-	return (newstash);
-}
-
-char	*ft_remove_line(char *stash)
-{
-	char	*newstash;
-	int		i;
-
-	if (!stash)
-		return (NULL);
-	i = find_newline(stash);
-	if (i == -1)
-	{
-		free(stash);
-		return (NULL);
-	}
-	i++;
-	newstash = create_newstash(stash, i);
-	free(stash);
 	return (newstash);
 }
