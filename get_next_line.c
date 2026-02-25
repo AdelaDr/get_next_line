@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 static char	*read_and_store(int fd, char *stash)
 {
@@ -46,16 +46,35 @@ static char	*extract_line(char *stash)
 	line = malloc(i + (stash[i] == '\n') + 1);
 	if (!line)
 		return (NULL);
-	i = 0; 
-	while(stash[i] && stash[i] != '\n') 
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
 	{
-		line[i] = stash[i]; 
+		line[i] = stash[i];
 		i++;
 	}
 	if (stash[i] == '\n')
 		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
+}
+
+static char	*ft_remove_line(char *stash)
+{
+	char	*newstash;
+	int		i;
+
+	if (!stash)
+		return (NULL);
+	i = find_newline(stash);
+	if (i == -1)
+	{
+		free(stash);
+		return (NULL);
+	}
+	i++;
+	newstash = create_newstash(stash, i);
+	free(stash);
+	return (newstash);
 }
 
 char	*get_next_line(int fd)
